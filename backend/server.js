@@ -1,37 +1,34 @@
-require("dotenv").config();
+require('dotenv').config();
 
-const express = require("express");
-const workoutRoutes = require("./routes/workouts");
-const mongoose = require("mongoose");
+const express = require('express');
+const workoutRoutes = require('./routes/workouts');
+const mongoose = require('mongoose');
 
 // Express app
 const app = express();
 
 // Middleware
-app.use(express.json(), express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
-  console.log(req.path, res.method, res.statusCode);
+  console.log(req.path, req.method);
   next();
 });
 
 // Routes
-app.use("/api/workouts", workoutRoutes);
+app.use('/api/workouts', workoutRoutes);
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then((result) => {
-    console.log("Connected to MongoDB");
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('Connected to MongoDB');
+    // Listen for requests
+    app.listen(process.env.PORT, () => {
+      console.log('Listening on port', process.env.PORT);
+    });
   })
   .catch((err) => {
-    console.log(err);
+    console.error('Error connecting to MongoDB:', err);
   });
-
-// Listen for requests
-app.listen(process.env.PORT, () => {
-  console.log("Listening on port", process.env.PORT);
-});
