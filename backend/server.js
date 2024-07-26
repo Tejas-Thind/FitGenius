@@ -6,6 +6,9 @@ const workoutRoutes = require('./routes/workouts')
 // Express app
 const app = express();
 
+// Middleware
+app.use(express.json(), express.urlencoded({extended: true}));
+
 app.use((req, res, next) => {
     console.log(req.path, res.method, res.statusCode);
     next();
