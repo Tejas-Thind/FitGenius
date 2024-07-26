@@ -1,4 +1,3 @@
-const { ServerMonitoringMode } = require("mongodb");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -29,6 +28,4 @@ const workoutSchema = new Schema(
   { timestamps: true }
 );
 
-const Workout = mongoose.model("Workout", workoutSchema);
-
-module.exports = Workout;
+module.exports() = mongoose.model("Workout", workoutSchema);
