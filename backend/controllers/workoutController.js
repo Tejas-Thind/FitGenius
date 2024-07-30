@@ -10,6 +10,12 @@ const allWorkouts = async (req, res) => {
 // GET a single workout
 const singleWorkout = async (req, res) => {
   const workout = await Workout.findById(req.params.id);
+
+  if (!workout) {
+    return res.status(400).json({ error: "Workout not found" });
+  }
+
+  res.status(200).json(workout);
 };
 
 // POST a new wokrout
