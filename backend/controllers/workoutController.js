@@ -1,13 +1,15 @@
 const Workout = require("../models/workoutModel");
 
 // GET all workouts
-const allWorkouts = (req, res) => {
-  res.json({ mssg: "Workouts endpoint" });
+const allWorkouts = async (req, res) => {
+  const workouts = await Workout.find({}).sort({ createdAt: -1 });
+
+  res.status(200).json(workouts);
 };
 
 // GET a single workout
-const singleWorkout = (req, res) => {
-  //req.params.id
+const singleWorkout = async (req, res) => {
+  const workout = await Workout.findById(req.params.id);
 };
 
 // POST a new wokrout
