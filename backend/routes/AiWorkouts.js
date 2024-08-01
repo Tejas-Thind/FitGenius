@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const {
-    allAiWorkouts,
-    singleAiWorkout,
-    createAiWorkout,
-    deleteAiWorkout
+  allAiWorkouts,
+  singleAiWorkout,
+  createAiWorkout,
+  deleteAiWorkout,
 } = require("../controllers/AiWorkoutController");
 
 // Routes for AI generated workouts
