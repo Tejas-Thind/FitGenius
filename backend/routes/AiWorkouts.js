@@ -9,15 +9,15 @@ const {
 // Routes for AI generated workouts
 
 // GET all personalised workouts
-router.get("/personalised-workouts", allAiWorkouts);
+router.get("/", allAiWorkouts);
 
 // GET a single personalised workout
-router.get("/personalised-workouts/:id", singleAiWorkout);
+router.get("/:id", singleAiWorkout);
 
 // POST a new personalised workout
-router.post("/personalised-workouts", createAiWorkout);
+router.post("/", createAiWorkout);
 
 // DELETE a personalised workout
-router.delete("/personalised-workouts/:id", deleteAiWorkout);
+router.delete("/:id", deleteAiWorkout);
 
 module.exports = router;

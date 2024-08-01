@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/workouts', workoutRoutes);
 
-app.use('/personalised-workouts', );
+app.use('/personalised-workouts', AiWorkoutRoutes);
 
 // Connect to MongoDB
 mongoose
