@@ -1,5 +1,5 @@
 {
-  "proxy": "https://shiny-parakeet-g44wqw4g4gjvfwj7v-4000.app.github.dev",
+  "proxy": "127.0.0.1:4000/",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
