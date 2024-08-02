@@ -1,32 +1,34 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react"
+
+// components
+//import WorkoutDetails from "../components/WorkoutDetails"
 
 const Home = () => {
-  const [workouts, setWorkouts] = useState([]);
+  const [workouts, setWorkouts] = useState(null)
+
   useEffect(() => {
-    document.title = "FitGenius | Home";
     const fetchWorkouts = async () => {
-      const response = await fetch("/api/workouts");
-      const data = await response.json();
+      const response = await fetch('/api/workouts')
+      const json = await response.json()
 
       if (response.ok) {
-        setWorkouts(data);
-      } else {
-        console.log("There was an error");
+        setWorkouts(json)
       }
-    };
-    fetchWorkouts();
-  }, []);
+    }
+
+    fetchWorkouts()
+  }, [])
 
   return (
     <div className="home">
       <div className="workouts">
-        {workouts.map((workout) => {
-          <p key={workout._id}>{workout.title}</p>;
-          //<workoutDetails workout={workout} key={workout._id} />;
-        })}
+        {workouts && workouts.map(workout => (
+          <p key={workout._id}>{workout.title}</p>
+          //<WorkoutDetails workout={workout} key={workout._id} />
+        ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

@@ -28,10 +28,10 @@ const singleWorkout = async (req, res) => {
 // POST a new wokrout
 const createWorkout = async (req, res) => {
   // Destructuring
-  const { title, load, sets, reps } = req.body;
+  const { title, load, sets, reps, notes } = req.body;
   // Add workout to DB
   try {
-    const workout = await Workout.create({ title, load, sets, reps });
+    const workout = await Workout.create({ title, load, sets, reps, notes });
     res.status(200).json(workout);
   } catch (error) {
     res.status(400).json({ error: error.message });
