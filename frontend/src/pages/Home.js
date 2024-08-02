@@ -5,9 +5,7 @@ const Home = () => {
   useEffect(() => {
     document.title = "FitGenius | Home";
     const fetchWorkouts = async () => {
-      const response = await fetch(
-        "https://shiny-parakeet-g44wqw4g4gjvfwj7v.github.dev/api/workouts"
-      );
+      const response = await fetch("/api/workouts");
       const data = await response.json();
 
       if (response.ok) {
@@ -23,7 +21,7 @@ const Home = () => {
     <div className="home">
       <div className="workouts">
         {workouts.map((workout) => {
-          <p key={workout._id}>{workout.title}</p>
+          <p key={workout._id}>{workout.title}</p>;
           //<workoutDetails workout={workout} key={workout._id} />;
         })}
       </div>
