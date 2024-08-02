@@ -1,6 +1,5 @@
 /* Google Font */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 /* Layout */
 :root {
   --primary: #1aac83;
@@ -12,20 +11,21 @@
 /* Reset */
 * {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 body {
   background: var(--background-color); /* Black background */
   color: var(--text-color); /* White text */
-  font-family: "Poppins", sans-serif;
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
 }
 
 header {
   background: var(--background-color); /* Black background for header */
-  border-bottom: 1px solid #ddd; /* Optional: Adjust border color if needed */
+  border-bottom: 1px solid rgba(221, 221, 221, 0.20); /* Smoke grey with reduced opacity */
   padding-left: 10px;
+  font-style: italic;
+  font-weight: 500;
 }
 
 header .container {
@@ -35,6 +35,10 @@ header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+header .container h2 {
+  font-weight: 600;
 }
 
 header a {
@@ -61,9 +65,4 @@ h4,
 h5,
 h6 {
   color: var(--text-color); /* White text for headings */
-}
-
-button {
-  background-color: var(--primary); /* Set button color to primary */
-  color: var(--text-color); /* White text on buttons */
 }
