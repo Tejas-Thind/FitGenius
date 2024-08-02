@@ -1,25 +1,31 @@
 /* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
 
 /* Layout */
 :root {
   --primary: #1aac83;
   --error: #e7195a;
+  --background-color: #000; /* Black background */
+  --text-color: #fff; /* White text */
 }
 
 /* Reset */
 * {
-  margin-top: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: #f1f1f1;
+  background: var(--background-color); /* Black background */
+  color: var(--text-color); /* White text */
   font-family: "Poppins", sans-serif;
 }
 
 header {
-  background: #fff;
-  border-bottom: 1px solid #ddd; /* Optional: Add a border to see if there's an issue */
+  background: var(--background-color); /* Black background for header */
+  border-bottom: 1px solid #ddd; /* Optional: Adjust border color if needed */
+  padding-left: 10px;
 }
 
 header .container {
@@ -32,7 +38,7 @@ header .container {
 }
 
 header a {
-  color: #333;
+  color: var(--text-color); /* White text for links */
   text-decoration: none;
 }
 
@@ -40,4 +46,24 @@ header a {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
+  color: var(--text-color); /* White text for page content */
+}
+
+/* Additional Styling for other elements (optional) */
+a {
+  color: var(--text-color); /* White text for all links */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-color); /* White text for headings */
+}
+
+button {
+  background-color: var(--primary); /* Set button color to primary */
+  color: var(--text-color); /* White text on buttons */
 }
