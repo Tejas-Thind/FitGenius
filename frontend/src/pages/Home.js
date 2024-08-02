@@ -23,9 +23,9 @@ const Home = () => {
     <div className="home">
       <div className="workouts">
         {workouts.map((workout) => {
-          <workoutDetails workout={workout} key={workout._id} />;
+          <p key={workout._id}>{workout.title}</p>
+          //<workoutDetails workout={workout} key={workout._id} />;
         })}
-        ;
       </div>
     </div>
   );
