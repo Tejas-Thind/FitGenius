@@ -8,6 +8,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
+      document.title = "FitGenius | Home";
       const response = await fetch("/api/workouts/");
       const json = await response.json();
 

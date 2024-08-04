@@ -2,10 +2,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 /* Layout */
 :root {
-  --primary: #1aac83;
+  --primary: #1bbf91;
   --error: #e7195a;
   --background-color: #000; /* Black background */
   --text-color: #fff; /* White text */
+  --grey-color: rgba(176, 176, 176, 0.25); /* Dark grey */
 }
 
 /* Reset */
@@ -22,7 +23,7 @@ body {
 
 header {
   background: var(--background-color); /* Black background for header */
-  border-bottom: 1px solid rgba(221, 221, 221, 0.20); /* Smoke grey with reduced opacity */
+  border-bottom: 1px solid var(--grey-color); /* Smoke grey with reduced opacity */
   padding-left: 10px;
   font-style: italic;
   font-weight: 500;
@@ -53,7 +54,7 @@ header a {
   color: var(--text-color); /* White text for page content */
 }
 
-/* Additional Styling for other elements (optional) */
+/* Additional Styling for other elements */
 a {
   color: var(--text-color); /* White text for all links */
 }
@@ -65,4 +66,49 @@ h4,
 h5,
 h6 {
   color: var(--text-color); /* White text for headings */
+}
+
+/* homepage */
+.home {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 100px;
+}
+.workout-details {
+  background: #181616;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  border-radius: 15px;
+  border: 1px solid var(--primary);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border 0.1s ease;
+}
+/* Hover effect */
+.workout-details:hover {
+  transform: translateX(10px); /* Move the div 10 pixels to the right */
+  background-color: var(--grey-color); /* Change background color on hover */
+  box-shadow: 0 4px 15px var(--primary);
+  border: none;
+}
+.workout-details h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.workout-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: var(--text-color);
+}
+.workout-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
 }

@@ -18,6 +18,7 @@ const workoutDetails = ({ workout }) => {
         <strong>Notes: </strong>
         {workout.notes}
       </p>
+      <p><strong>Created at: </strong>{workout.createdAt}</p>
     </div>
   );
 };
