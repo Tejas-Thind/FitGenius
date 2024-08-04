@@ -4,8 +4,9 @@ const WorkoutForm = () => {
   const [title, setTitle] = useState("");
   const [sets, setSets] = useState("");
   const [reps, setReps] = useState("");
-  const [load, setload] = useState("");
+  const [load, setLoad] = useState("");
   const [notes, setNotes] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,11 +18,23 @@ const WorkoutForm = () => {
       body: JSON.stringify(workout),
       headers: {
         "Content-Type": "application/json",
-      }
-    })
+      },
+    });
 
     const data = await response.json();
-    
+
+    if (!response.ok) {
+      setError(data.error);
+    }
+    if (response.ok) {
+      console.log("New workout added!");
+      setError(null);
+      setTitle("");
+      setSets("");
+      setReps("");
+      setLoad("");
+      setNotes("");
+    }
   };
 
   return (
