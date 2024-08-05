@@ -71,7 +71,13 @@ const WorkoutForm = () => {
         onChange={(e) => setNotes(e.target.value)}
         value={notes}
       />
-      <button>Create Workout</button>
+      <div class="button-container">
+        <button class="pushable">
+          <span class="edge"></span>
+          <span class="front">Create Workout</span>
+        </button>
+      </div>
+
       {error && <div className="error">{error}</div>}
     </form>
   );

@@ -88,8 +88,8 @@ h6 {
 }
 /* Hover effect */
 .workout-details:hover {
-  transform: translateX(10px); /* Move the div 10 pixels to the right */
-  background-color: var(--grey-color); /* Change background color on hover */
+  transform: translateX(10px);
+  background-color: var(--grey-color);
   box-shadow: 0 4px 15px var(--primary);
   border: none;
 }
@@ -162,27 +162,79 @@ h6 {
   background: #2c2c2c;
   color: var(--text-color);
   font-size: 1em;
-  box-sizing: border-box; /* Ensure padding and border are included in total width and height */
+  box-sizing: border-box;
 }
 
-/* Form Button */
-.create button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-top: 20px;
+/* Submit workout Button */
+
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pushable {
+  position: relative;
+  background: transparent;
+  padding: 0px;
   border: none;
-  border-radius: 6px;
-  background: var(--primary);
-  color: var(--text-color);
-  font-size: 1em;
   cursor: pointer;
-  border: 2px solid transparent;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  outline-offset: 4px;
+  outline-color: var(--primary);
+  transition: filter 250ms;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.create button:hover {
-  border-color: #f1f1f1;
+.edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  background: linear-gradient(
+    to right,
+    var(--primary) 0%,
+    rgba(27, 191, 145, 0.8) 8%,
+    var(--primary) 92%,
+    rgba(27, 191, 145, 0.6) 100%
+  );
+}
+
+.front {
+  display: block;
+  position: relative;
+  border-radius: 8px;
+  background: var(--primary);
+  padding: 12px 24px;
+  color: var(--text-color);
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.9rem;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.pushable:hover {
+  filter: brightness(110%);
+}
+
+.pushable:hover .front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.pushable:active .front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.pushable:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Error Message */
