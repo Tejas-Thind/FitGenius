@@ -1,20 +1,32 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer } from "react";
 
 export const WorkoutContext = createContext();
 
 export const workoutsReducer = (state, action) => {
+  // state is the previous state, action is the new state
+  switch (action.type) {
+    case "SET_WORKOUTS":
+      return {
+        workouts: action.payload, // action.payload is the new state which is an array of workouts
+      };
+    case "CREATE_WORKOUT":
+      return {
+        workouts: [action.payload, ...state.workouts], //
+      };
+    default:
+      return state;
+  }
+};
 
-}
+export const WorkoutsContextProvider = ({ children }) => {
+  // children represents the app component that I wrapped inside the index file
+  const [state, dispatch] = useReducer(workoutsReducer, {
+    workouts: null,
+  });
 
-export const WorkoutsContextProvider = ({ children }) => { // children represents the app component that I wrapped inside the index file     
-
-    const [state, dispatch] = useReducer(workoutsReducer, {
-        workouts: null
-    })
-
-    return (
-        <WorkoutsContext.Provider>
-            { children }
-        </WorkoutsContext.Provider>
-    )
+  return (
+    <WorkoutsContext.Provider value={{ state, dispatch }}>
+      {children}
+    </WorkoutsContext.Provider>
+  );
 };
