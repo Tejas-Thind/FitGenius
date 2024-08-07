@@ -9,6 +9,7 @@ const WorkoutForm = () => {
   const [load, setLoad] = useState("");
   const [notes, setNotes] = useState("");
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +28,9 @@ const WorkoutForm = () => {
 
     if (!response.ok) {
       setError(data.error);
+      setEmptyFields(data.emptyFields || []);
     }
+
     if (response.ok) {
       console.log("New workout added!");
       setError(null);
@@ -36,7 +39,8 @@ const WorkoutForm = () => {
       setReps("");
       setLoad("");
       setNotes("");
-      dispatch({type:'CREATE_WORKOUT', payload:data});
+      setEmptyFields([]);
+      dispatch({ type: "CREATE_WORKOUT", payload: data });
     }
   };
 
@@ -49,24 +53,28 @@ const WorkoutForm = () => {
         type="text"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
+        className={emptyFields.includes("title") ? "error" : ""}
       />
       <label>Sets: </label>
       <input
         type="number"
         onChange={(e) => setSets(e.target.value)}
         value={sets}
+        className={emptyFields.includes("sets") ? "error" : ""}
       />
       <label>Reps: </label>
       <input
         type="number"
         onChange={(e) => setReps(e.target.value)}
         value={reps}
+        className={emptyFields.includes("reps") ? "error" : ""}
       />
       <label>Load (lbs): </label>
       <input
         type="number"
         onChange={(e) => setLoad(e.target.value)}
         value={load}
+        className={emptyFields.includes("load") ? "error" : ""}
       />
       <label>Notes (Optional): </label>
       <input
@@ -74,10 +82,10 @@ const WorkoutForm = () => {
         onChange={(e) => setNotes(e.target.value)}
         value={notes}
       />
-      <div class="button-container">
-        <button class="pushable">
-          <span class="edge"></span>
-          <span class="front">Create Workout</span>
+      <div className="button-container">
+        <button className="pushable">
+          <span className="edge"></span>
+          <span className="front">Create Workout</span>
         </button>
       </div>
 

@@ -83,7 +83,7 @@ h6 {
   border-radius: 15px;
   border: 1px solid var(--primary);
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease,
+  transition: transform 0.55s ease, box-shadow 0.3s ease,
     background-color 0.3s ease, border 0.1s ease;
 }
 /* Hover effect */
@@ -238,12 +238,16 @@ h6 {
 }
 
 /* Error Message */
-.error {
-  margin-top: 20px;
+div.error {
   padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
   border-radius: 4px;
-  background: var(--error);
-  color: var(--text-color);
-  font-size: 1em;
-  text-align: center;
+  margin: 20px 0;
+}
+/*Border arround not fields not filled in*/
+.create input[type="text"].error,
+.create input[type="number"].error {
+  border: 1px solid var(--error) !important;
 }
