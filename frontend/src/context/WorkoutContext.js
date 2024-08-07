@@ -11,7 +11,7 @@ export const workoutsReducer = (state, action) => {
       };
     case "CREATE_WORKOUT":
       return {
-        workouts: [action.payload, ...state.workouts], //
+        workouts: [action.payload, ...state.workouts] 
       };
     default:
       return state;
@@ -30,3 +30,7 @@ export const WorkoutsContextProvider = ({ children }) => {
     </WorkoutsContext.Provider>
   );
 };
+
+/*WorkoutContext: The context for managing workouts.
+workoutsReducer: Defines how the state of workouts changes in response to different actions.
+WorkoutsContextProvider: Provides the workouts state and the dispatch function to the components in your app. This allows components to read the workouts state and dispatch actions to update it.*/
