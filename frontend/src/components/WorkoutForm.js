@@ -36,7 +36,7 @@ const WorkoutForm = () => {
       setReps("");
       setLoad("");
       setNotes("");
-      dispatch({type:'CREATE_WORKOUT', payload:workout});
+      dispatch({type:'CREATE_WORKOUT', payload:data});
     }
   };
 
