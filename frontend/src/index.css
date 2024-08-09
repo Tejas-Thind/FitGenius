@@ -251,3 +251,45 @@ div.error {
 .create input[type="number"].error {
   border: 1px solid var(--error) !important;
 }
+
+/*Not Found Page*/
+/* src/pages/NotFound.css */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--background-color); /* Black background */
+  color: var(--text-color); /* White text */
+  text-align: center;
+  padding: 20px;
+}
+
+.not-found-title {
+  font-size: 4rem; /* Large font size for title */
+  color: var(--primary); /* Primary color for title */
+  margin-bottom: 10px;
+}
+
+.not-found-message {
+  font-size: 1.25rem; /* Medium font size for message */
+  color: var(--text-color); /* White text for message */
+  margin-bottom: 20px;
+}
+
+.not-found-link {
+  font-size: 1rem; /* Standard font size for links */
+  color: var(--text-color); /* White text for link */
+  text-decoration: none;
+  border: 1px solid var(--primary); /* Primary color border */
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #181616; /* Dark background for button to match other components */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.not-found-link:hover {
+  background-color: var(--primary); /* Change background color on hover */
+  color: var(--text-color); /* White text on hover */
+}
