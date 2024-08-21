@@ -24,6 +24,7 @@ app.use("/personalised-workouts", authenticateToken, AiWorkoutRoutes);
 
 // Connect to MongoDB
 mongoose
+  .set("strictQuery", false)
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
