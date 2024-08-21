@@ -1,4 +1,3 @@
-// src/pages/About.js
 function About() {
   return (
     <div className="about">
