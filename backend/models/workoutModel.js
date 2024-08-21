@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const workoutSchema = new Schema(
+const workoutSchema = new mongoose.Schema(
   {
     title: {
       type: String,
+      required: true,
+    },
+    load: {
+      type: Number,
       required: true,
     },
     sets: {
@@ -15,17 +19,14 @@ const workoutSchema = new Schema(
       type: Number,
       required: true,
     },
-    load: {
-      type: Number,
-      required: true,
-    },
-    notes: {
+    notes: String,
+    userId: {
       type: String,
-      required: false,
-      default: "",
+      required: true,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Workout", workoutSchema);
+const Workout = mongoose.model("Workout", workoutSchema);
+module.exports = Workout;
