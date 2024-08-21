@@ -1,3 +1,4 @@
+// src/index.js
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -8,6 +9,11 @@ import { AuthProvider } from "./context/AuthContext"; // Assuming you have the A
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <AuthProvider>
+      <WorkoutsContextProvider>
+        <App />
+      </WorkoutsContextProvider>
+    </AuthProvider>
     <AuthProvider>
       <WorkoutsContextProvider>
         <App />
