@@ -1,4 +1,4 @@
-function About() {
+const About = () => {
   return (
     <div className="about">
       <h1 className="about-title">About FitGenius</h1>
@@ -25,6 +25,6 @@ function About() {
       </p>
     </div>
   );
-}
+};
 
 export default About;

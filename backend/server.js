@@ -4,11 +4,12 @@ const cors = require("cors");
 const workoutRoutes = require("./routes/workouts");
 const AiWorkoutRoutes = require("./routes/AiWorkouts");
 const mongoose = require("mongoose");
+const authenticateToken = require("./middlewares/authToken");
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -17,9 +18,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
-app.use("/api/workouts", workoutRoutes);
-app.use("/personalised-workouts", AiWorkoutRoutes);
+// Apply authenticateToken middleware to protect these routes
+app.use("/api/workouts", authenticateToken, workoutRoutes);
+app.use("/personalised-workouts", authenticateToken, AiWorkoutRoutes);
 
 // Connect to MongoDB
 mongoose

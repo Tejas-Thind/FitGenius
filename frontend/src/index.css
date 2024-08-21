@@ -6,7 +6,8 @@
   --error: #e7195a;
   --background-color: #000; /* Black background */
   --text-color: #fff; /* White text */
-  --grey-color: rgba(176, 176, 176, 0.25); /* Dark grey */
+  --grey-color: rgba(176, 176, 176, 0.25); /* Light ish grey */
+  --darker-grey: #181616; /* Darker grey */
 }
 
 /* Reset */
@@ -22,8 +23,8 @@ body {
 }
 
 header {
-  background: var(--background-color); /* Black background for header */
-  border-bottom: 1px solid var(--grey-color); /* Smoke grey with reduced opacity */
+  background: var(--background-color);
+  border-bottom: 1px solid var(--grey-color);
   padding-left: 10px;
   font-style: italic;
   font-weight: 500;
@@ -38,12 +39,103 @@ header .container {
   justify-content: space-between;
 }
 
-header .container h2 {
+header .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header .container h1 {
   font-weight: 600;
+  color: var(--primary);
+  transition: text-shadow 0.3s ease;
+}
+
+header nav {
+  display: flex;
+  gap: 15px;
+  font-size: 17px;
+}
+
+/* Tabs in the nav bar */
+header nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+  padding-bottom: 5px;
+  transition: text-shadow 0.3s ease;
+}
+
+header nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+  transform: scaleX(0); /* Start with an invisible underline */
+  transition: transform 0.3s ease;
+  transform-origin: bottom right;
+}
+
+header nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+header nav a:hover {
+  text-shadow: 0 0 8px var(--primary);
+}
+
+/* Logout button */
+header nav button {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 5px 5px;
+  color: var(--primary);
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 17px;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  display: inline-block;
+  transition: text-shadow 0.3s ease; /* Apply text-shadow transition here */
+}
+
+header nav button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease; /* Apply transform transition here */
+}
+
+header nav button:hover {
+  text-shadow: 0 0 8px var(--primary); /* Apply text shadow on hover */
+}
+
+header nav button:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+header .container h1:hover {
+  text-shadow: 0 0 8px var(--primary);
 }
 
 header a {
-  color: var(--text-color); /* White text for links */
+  color: var(--primary); /* White text for links */
   text-decoration: none;
 }
 
@@ -91,7 +183,7 @@ h6 {
   transform: translateX(10px);
   background-color: var(--grey-color);
   box-shadow: 0 4px 15px var(--primary);
-  border: none;
+  border: 1px solid var(--background-color);
 }
 .workout-details h3 {
   margin: 0 0 10px 0;
@@ -116,7 +208,7 @@ h6 {
 
 /* Form Styling */
 .create {
-  background: #181616; /* Match the background of workout details */
+  background: #181616;
   border-radius: 15px;
   margin: 20px auto;
   padding: 20px;
@@ -130,7 +222,7 @@ h6 {
 
 /* Hover effect for form */
 .create:hover {
-  background-color: var(--grey-color); /* Change background color on hover */
+  background-color: var(--grey-color);
   box-shadow: 0 4px 15px var(--primary);
   border: none;
 }
@@ -209,7 +301,7 @@ h6 {
   border-radius: 8px;
   background: var(--primary);
   padding: 12px 24px;
-  color: var(--text-color);
+  color: var(--background-color);
   font-family: "Playfair Display", serif;
   font-weight: 600;
   text-transform: uppercase;
@@ -252,44 +344,488 @@ div.error {
   border: 1px solid var(--error) !important;
 }
 
-/*Not Found Page*/
-/* src/pages/NotFound.css */
+/* Login Page Styles */
+.login {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--darker-grey);
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease, border 0.1s ease, transform 0.3s ease;
+}
+
+.login:hover {
+  box-shadow: 0 0 20px var(--primary);
+  border: 1px solid var(--background-color);
+  transform: scale(1.05);
+}
+
+.login .form-title {
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.login input {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.login input::placeholder {
+  color: var(--text-color);
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.styled-button {
+  position: relative;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  outline-offset: 4px;
+  outline-color: var(--primary);
+  transition: filter 250ms;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.button-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  background: linear-gradient(
+    to right,
+    var(--primary) 0%,
+    rgba(27, 191, 145, 0.8) 8%,
+    var(--primary) 92%,
+    rgba(27, 191, 145, 0.6) 100%
+  );
+}
+
+.button-front {
+  display: block;
+  position: relative;
+  border-radius: 8px;
+  background: var(--primary);
+  padding: 10px 20px;
+  color: var(--background-color);
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.9rem;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.styled-button:hover {
+  filter: brightness(110%);
+}
+
+.styled-button:hover .button-front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.styled-button:active .button-front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.styled-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .login {
+    padding: 15px;
+  }
+
+  .login .form-title {
+    font-size: 1.25rem;
+  }
+
+  .login input,
+  .login .styled-button {
+    font-size: 0.9rem;
+  }
+}
+
+/* Sign Up Page Styles */
+.signup {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--darker-grey);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease, border 0.1s ease, transform 0.3s ease;
+}
+
+.signup:hover {
+  box-shadow: 0 0 20px var(--primary);
+  border: 1px solid var(--background-color);
+  transform: scale(1.05);
+}
+
+.signup .form-title {
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.signup input {
+  width: calc(100% - 22px); /* Adjusts width to fit within the container */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensures padding is included in width */
+}
+
+.signup input::placeholder {
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+  .signup {
+    padding: 15px;
+  }
+
+  .signup .form-title {
+    font-size: 1.25rem;
+  }
+
+  .signup input,
+  .signup .styled-button {
+    font-size: 0.9rem;
+  }
+}
+
+/* Not Found Page */
 .not-found {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: var(--background-color); /* Black background */
-  color: var(--text-color); /* White text */
+  background: var(--background-color);
+  color: var(--text-color);
   text-align: center;
   padding: 20px;
 }
 
 .not-found-title {
-  font-size: 4rem; /* Large font size for title */
-  color: var(--primary); /* Primary color for title */
+  font-size: 4rem;
+  color: var(--primary);
   margin-bottom: 10px;
 }
 
 .not-found-message {
-  font-size: 1.25rem; /* Medium font size for message */
-  color: var(--text-color); /* White text for message */
+  font-size: 1.25rem;
+  color: var(--text-color);
   margin-bottom: 20px;
 }
 
-.not-found-link {
-  font-size: 1rem; /* Standard font size for links */
-  color: var(--text-color); /* White text for link */
-  text-decoration: none;
-  border: 1px solid var(--primary); /* Primary color border */
-  padding: 10px 20px;
-  border-radius: 5px;
-  background: #181616; /* Dark background for button to match other components */
-  transition: background-color 0.3s, color 0.3s;
+/* Spinning Tree Animation*/
+.container {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 60px;
 }
 
-.not-found-link:hover {
-  background-color: var(--primary); /* Change background color on hover */
-  color: var(--text-color); /* White text on hover */
+.tree {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  transform-style: preserve-3d;
+  transform: rotateX(-20deg) rotateY(30deg);
+  animation: treeAnimate 5s linear infinite;
+}
+
+@keyframes treeAnimate {
+  0% {
+    transform: rotateX(-20deg) rotateY(360deg);
+  }
+
+  100% {
+    transform: rotateX(-20deg) rotateY(0deg);
+  }
+}
+
+.tree div {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateY(calc(25px * var(--x))) translateZ(0px);
+}
+
+.tree div.branch span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #69c069, #77dd77);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  border-bottom: 5px solid #00000019;
+  transform-origin: bottom;
+  transform: rotateY(calc(90deg * var(--i))) rotateX(30deg) translateZ(28.5px);
+}
+
+.tree div.stem span {
+  position: absolute;
+  top: 110px;
+  /* updated top value */
+  left: calc(50% - 7.5px);
+  width: 15px;
+  height: 50%;
+  background: linear-gradient(90deg, #bb4622, #df7214);
+  border-bottom: 5px solid #00000019;
+  transform-origin: bottom;
+  transform: rotateY(calc(90deg * var(--i))) translateZ(7.5px);
+}
+
+.shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  filter: blur(20px);
+  transform-style: preserve-3d;
+  transform: rotateX(90deg) translateZ(-65px);
+}
+
+/* About Page Styles */
+.about {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--grey-color);
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: box-shadow 0.3s ease, border 0.1s ease, transform 0.3s ease;
+}
+
+.about:hover {
+  box-shadow: 0 0 20px var(--primary);
+  border: 1px solid var(--background-color);
+  transform: scale(1.05);
+}
+
+.about-title {
+  font-size: 2rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.about-description {
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 15px;
+  }
+
+  .about-title {
+    font-size: 1.5rem;
+  }
+
+  .about-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* Edit Workout Page Styles */
+.edit-workout {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--darker-grey);
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.edit-workout:hover {
+  box-shadow: 0 0 20px var(--primary);
+  border: 1px solid var(--background-color);
+}
+
+.edit-workout .form-title {
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.edit-workout label {
+  display: block;
+  margin: 10px 0 5px;
+  color: var(--text-color);
+}
+
+.edit-workout input,
+.edit-workout textarea {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.edit-workout input::placeholder,
+.edit-workout textarea::placeholder {
+  color: var(--text-color);
+}
+
+.edit-buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.edit-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.edit-buttons {
+  position: relative;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  outline-offset: 4px;
+  outline-color: var(--primary);
+  transition: filter 250ms;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.edit-button-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  background: linear-gradient(
+    to right,
+    var(--primary) 0%,
+    rgba(27, 191, 145, 0.8) 8%,
+    var(--primary) 92%,
+    rgba(27, 191, 145, 0.6) 100%
+  );
+}
+
+.edit-button-front {
+  display: block;
+  position: relative;
+  border-radius: 8px;
+  background: var(--primary);
+  padding: 10px 20px;
+  color: var(--background-color);
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.9rem;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.edit-buttons:hover .edit-button-front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.edit-buttons:active .edit-button-front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.edit-buttons:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Style for editable input fields */
+.edit-workout input[type="text"].editable-input,
+.edit-workout input[type="number"].editable-input,
+.edit-workout textarea.editable-input {
+  border: 1px solid rgb(181, 255, 85) !important;
+}
+
+/* Style for non-editable input fields (When edit button is not clicked) */
+.edit-workout input[type="text"].non-editable-input,
+.edit-workout input[type="number"].non-editable-input,
+.edit-workout textarea.non-editable-input {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .edit-workout {
+    padding: 15px;
+  }
+
+  .edit-workout .form-title {
+    font-size: 1.25rem;
+  }
+
+  .edit-workout input,
+  .edit-workout textarea,
+  .edit-button-reset,
+  .edit-button-toggle,
+  .edit-button-save {
+    font-size: 0.9rem;
+  }
 }

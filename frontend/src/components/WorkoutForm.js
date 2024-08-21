@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { supabase } from "../supabaseClient";
 
 const WorkoutForm = () => {
   const { dispatch } = useWorkoutsContext();
@@ -14,33 +15,44 @@ const WorkoutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Extract the session to get the token
+    const { data } = await supabase.auth.getSession();
+    const token = data.session.access_token;
+
+    // Construct the workout object
     const workout = { title, sets, reps, load, notes };
 
-    const response = await fetch("/api/workouts/", {
-      method: "POST",
-      body: JSON.stringify(workout),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const response = await fetch("/api/workouts/", {
+        method: "POST",
+        body: JSON.stringify(workout),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Include the Bearer token in the request
+        },
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
-      setError(data.error);
-      setEmptyFields(data.emptyFields || []);
-    }
+      if (!response.ok) {
+        setError(data.error);
+        setEmptyFields(data.emptyFields || []);
+      }
 
-    if (response.ok) {
-      console.log("New workout added!");
-      setError(null);
-      setTitle("");
-      setSets("");
-      setReps("");
-      setLoad("");
-      setNotes("");
-      setEmptyFields([]);
-      dispatch({ type: "CREATE_WORKOUT", payload: data });
+      if (response.ok) {
+        console.log("New workout added!");
+        setError(null);
+        setTitle("");
+        setSets("");
+        setReps("");
+        setLoad("");
+        setNotes("");
+        setEmptyFields([]);
+        dispatch({ type: "CREATE_WORKOUT", payload: data });
+      }
+    } catch (error) {
+      console.error("Error adding workout:", error);
+      setError("Something went wrong!");
     }
   };
 
@@ -55,6 +67,7 @@ const WorkoutForm = () => {
         value={title}
         className={emptyFields.includes("title") ? "error" : ""}
       />
+
       <label>Sets: </label>
       <input
         type="number"
@@ -62,6 +75,7 @@ const WorkoutForm = () => {
         value={sets}
         className={emptyFields.includes("sets") ? "error" : ""}
       />
+
       <label>Reps: </label>
       <input
         type="number"
@@ -69,6 +83,7 @@ const WorkoutForm = () => {
         value={reps}
         className={emptyFields.includes("reps") ? "error" : ""}
       />
+
       <label>Load (lbs): </label>
       <input
         type="number"
@@ -76,12 +91,14 @@ const WorkoutForm = () => {
         value={load}
         className={emptyFields.includes("load") ? "error" : ""}
       />
+
       <label>Notes (Optional): </label>
       <input
         type="text"
         onChange={(e) => setNotes(e.target.value)}
         value={notes}
       />
+
       <div className="button-container">
         <button className="pushable">
           <span className="edge"></span>

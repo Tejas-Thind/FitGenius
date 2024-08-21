@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { supabase } from "../supabaseClient";
 
 // components
 import WorkoutDetails from "../components/WorkoutDetails";
@@ -11,11 +12,19 @@ const Home = () => {
   useEffect(() => {
     const fetchWorkouts = async () => {
       document.title = "FitGenius | Home";
-      const response = await fetch("/api/workouts/");
+      const token = await supabase.auth
+        .getSession()
+        .then(({ data }) => data.session.access_token);
+
+      const response = await fetch("/api/workouts/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const json = await response.json();
 
       if (response.ok) {
-        dispatch({type:'SET_WORKOUTS', payload: json}); // json is an array of workouts
+        dispatch({ type: "SET_WORKOUTS", payload: json }); // json is an array of workouts
       }
     };
 

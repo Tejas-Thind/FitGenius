@@ -1,4 +1,5 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { supabase } from "../supabaseClient";
 
 // date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
@@ -7,19 +8,32 @@ const WorkoutDetails = ({ workout }) => {
   const { dispatch } = useWorkoutsContext();
 
   const handleClick = async () => {
+    const token = await supabase.auth
+      .getSession()
+      .then(({ data }) => data.session.access_token);
+
     const response = await fetch("/api/workouts/" + workout._id, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     const json = await response.json();
 
     if (response.ok) {
-      dispatch({ type: "DELETE_WORKOUT", payload: json.workout });
+      dispatch({ type: "DELETE_WORKOUT", payload: json });
+      console.log("Workout Deleted!");
     }
   };
 
   return (
     <div className="workout-details">
-      <h3>{workout.title}</h3>
+      <a
+        href={`/edit/${workout._id}`}
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <h3>{workout.title}</h3>
+      </a>
       <p>
         <strong>Load: </strong>
         {workout.load}
