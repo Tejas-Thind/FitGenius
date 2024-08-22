@@ -1,2 +1,36 @@
-.env
-node_modules
+# Ignore node_modules folders at all levels
+node_modules/
+
+# Ignore other dependency files
+/.pnp
+.pnp.js
+
+# Ignore testing-related files
+/coverage/
+
+# Ignore production build files
+/build/
+
+# Ignore environment files (keeping one for each folder)
+frontend/.env
+backend/.env
+
+# Ignore any local environment overrides
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore OS-specific files
+.DS_Store
+
+# Ignore log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Miscellaneous
+/frontend/.pnp
+/backend/.pnp
+/frontend/.pnp.js
+/backend/.pnp.js
