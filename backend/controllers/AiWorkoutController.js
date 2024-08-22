@@ -1,11 +1,23 @@
 const AiWorkout = require("../models/AiWorkoutModel");
 const mongoose = require("mongoose");
+const { OpenAI } = require("openai");
+
+const openai = new OpenAI({
+  apiKey: process.env.OPEN_AI_KEY,
+});
 
 // GET all Ai workouts
 const allAiWorkouts = async (req, res) => {
-  const workouts = await AiWorkout.find({}).sort({ createdAt: -1 });
+  try {
+    const userId = req.user.id;
+    const AiWorkouts = await AiWorkout.find({ userId }).sort({ createdAt: -1 });
 
-  res.status(200).json(workouts);
+    res.status(200).json(workouts);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to retrieve Personalised workouts" });
+  }
 };
 
 // GET a single Ai Workouts
@@ -27,14 +39,42 @@ const singleAiWorkout = async (req, res) => {
 
 // POST a new Personalised Workout
 const createAiWorkout = async (req, res) => {
-  // Destructuring
-  const { title, load, sets, reps } = req.body;
-  // Add AiWorkout to DB
   try {
-    const AiWorkout = await AiWorkout.create({ title, load, sets, reps });
-    res.status(200).json(AiWorkout);
+    const userInput = req.body;
+    const userId = req.user.id;
+
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is missing" });
+    }
+
+    // Generate AI workout using OpenAI API
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content:
+            "You will provide a personalised workout for the user depending on their prompt. You will make it in the format of: title, load, sets, reps, and equipment needed",
+        },
+        { role: "user", content: userInput },
+      ],
+      model: "gpt-3.5-turbo",
+    });
+
+    // Extract the AI-generated workout content
+    const aiWorkoutContent = completion.choices[0].message.content;
+
+    // Save the AI workout to the database
+    const aiWorkout = await AiWorkout.create({
+      workoutPlan: aiWorkoutContent,
+      userPrompt: userInput,
+      userId: userId,
+    });
+
+    // Return the AI-generated workout content as a response
+    res.json({ response: aiWorkoutContent });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error("Error with OpenAI API:", error);
+    res.status(500).send("Something went wrong with OpenAI API");
   }
 };
 

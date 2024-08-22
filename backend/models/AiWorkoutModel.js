@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const aiWorkoutSchema = new Schema(
@@ -7,8 +7,13 @@ const aiWorkoutSchema = new Schema(
       type: Object,
       required: true,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model('AiWorkout', aiWorkoutSchema);
+const AiWorkout = mongoose.model("AiWorkout", aiWorkoutSchema);
+module.exports = AiWorkout;
