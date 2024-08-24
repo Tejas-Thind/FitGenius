@@ -21,6 +21,9 @@ const Navbar = () => {
         <nav>
           {user ? (
             <>
+            <button>
+              <Link to="/">Home</Link>
+            </button>
               <button>
                 <Link to="/personalised-workouts">Personalised Workouts</Link>
               </button>

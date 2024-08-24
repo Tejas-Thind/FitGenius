@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 // Pages and Components
 import Home from "./pages/Home";
+import PersonalisedWorkouts from "./pages/PersonalisedWorkouts";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import About from "./pages/About";
@@ -13,7 +14,7 @@ import { useAuth } from "./hooks/useAuth";
 
 const AuthHandler = ({ children }) => {
   const { auth, setAuth } = useAuth();
-  const [isAuthenticated, setIsAuthenticated] = useState(null); // null indicates loading state
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -54,7 +55,15 @@ const App = () => {
                 <EditWorkout />
               </AuthHandler>
             }
-          />``
+          />
+          <Route
+            path="/personalised-workouts"
+            element={
+              <AuthHandler>
+                <PersonalisedWorkouts />
+              </AuthHandler>
+            }
+          />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />

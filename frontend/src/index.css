@@ -245,7 +245,8 @@ h6 {
 
 /* Form Inputs */
 .create input[type="text"],
-.create input[type="number"] {
+.create input[type="number"],
+.create textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;

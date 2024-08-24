@@ -98,7 +98,7 @@ const deleteWorkout = async (req, res) => {
     return res.status(404).json({
       error:
         "Workout not found or you are not authorized to delete this workout",
-    }); // Updated error message and status code to 404
+    });
   }
 
   res.status(200).json(workout);
