@@ -3,7 +3,7 @@ import { useAiWorkoutsContext } from "../hooks/useAiWorkoutsContext";
 import { supabase } from "../supabaseClient";
 
 // components
-import AiWorkoutSnippet from "../components/AiWorkoutDetails";
+import AiWorkoutSnippet from "../components/AiWorkoutSnippet";
 import AiWorkoutForm from "../components/AiWorkoutForm";
 
 const AiWorkouts = () => {

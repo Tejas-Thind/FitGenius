@@ -30,7 +30,7 @@ export const AiWorkoutsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AiWorkoutsReducer, { aiWorkouts: [] });
 
   useEffect(() => {
-    const fetchWorkouts = async () => {
+    const fetchAiWorkouts = async () => {
       try {
         // Fetch the session from Supabase
         const { data } = await supabase.auth.getSession();
@@ -62,7 +62,7 @@ export const AiWorkoutsContextProvider = ({ children }) => {
       }
     };
 
-    fetchWorkouts();
+    fetchAiWorkouts();
   }, []);
 
   return (

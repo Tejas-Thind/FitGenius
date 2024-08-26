@@ -7,6 +7,10 @@ const aiWorkoutSchema = new Schema(
       type: Object,
       required: true,
     },
+    userPrompt: {
+      type: String,
+      required: true,
+    },
     userId: {
       type: String,
       required: true,

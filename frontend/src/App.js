@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 // Pages and Components
 import Home from "./pages/Home";
 import PersonalisedWorkouts from "./pages/PersonalisedWorkouts";
+import AiWorkoutDetails from "./pages/AiWorkoutDetails";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import About from "./pages/About";
@@ -61,6 +62,14 @@ const App = () => {
             element={
               <AuthHandler>
                 <PersonalisedWorkouts />
+              </AuthHandler>
+            }
+          />
+          <Route
+            path="/personalised-workouts/:id"
+            element={
+              <AuthHandler>
+                <AiWorkoutDetails />
               </AuthHandler>
             }
           />
