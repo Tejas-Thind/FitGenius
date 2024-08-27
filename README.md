@@ -9,8 +9,8 @@ FitGenius is a full-stack fitness application designed to help users achieve the
 **Dynamic Content Rendering:** Efficient handling of workout data using React Hooks, with conditional rendering to ensure a smooth user experience.  
   
 ### Technical Stack:
-Frontend: React.js, React Router, CSS
-Backend: Node.js, Express.js, MongoDB, Mongoose
-Authentication: Supabase Auth
-AI Integration: OpenAI API for generating personalized workout plans
-Deployment: Deployed on platforms supporting the full-stack
+**Frontend:** React.js, React Router, HTML, CSS.  
+**Backend:** Node.js, Express.js, MongoDB, Mongoose.  
+**Authentication:** Supabase Auth.  
+**AI Integration:** OpenAI API for generating personalized workout plans.  
+**Deployment:** Deployed using Vercel. 
