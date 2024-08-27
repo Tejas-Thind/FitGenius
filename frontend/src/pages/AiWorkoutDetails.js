@@ -6,7 +6,7 @@ const AiWorkoutDetails = () => {
   const { id } = useParams();
   const { aiWorkouts } = useAiWorkoutsContext();
 
-  const [aiWorkout, setAiWorkout] = useState(null); // Set initial state to null
+  const [aiWorkout, setAiWorkout] = useState(null);
   const [loading, setLoading] = useState(true);
   const [formattedWorkoutPlan, setFormattedWorkoutPlan] = useState("");
 
@@ -28,18 +28,11 @@ const AiWorkoutDetails = () => {
         let formattedPlan = "<div style='line-height: 1.6;'>";
 
         lines.forEach((line) => {
-          if (line.startsWith("**")) {
-            if (line.includes("Day")) {
-              formattedPlan += `<h2 style="font-size: 1.5em; font-weight: bold; margin-bottom: 15px;">${line.replace(
-                /\*\*/g,
-                ""
-              )}</h2>`;
-            } else {
-              formattedPlan += `<h3 style="font-size: 1.2em; font-weight: bold; margin-top: 15px; margin-bottom: 10px;">${line.replace(
-                /\*\*/g,
-                ""
-              )}</h3>`;
-            }
+          if (line.startsWith("**Day") || line.startsWith("Day")) {
+            formattedPlan += `<h2 style="font-size: 1.5em; color: #1bbf91; font-weight: bold; margin-bottom: 15px;">${line.split('**').join('')}</h2>`;
+          } else if (/^\d+\./.test(line)) {
+            // Format exercise names (lines that start with a number and a dot)
+            formattedPlan += `<h3 style="font-size: 1.2em; color: White; font-weight: bold; margin-top: 15px; margin-bottom: 10px;">${line}</h3>`;
           } else if (line.includes("Rest Day")) {
             formattedPlan += `<div style="margin-top: 20px; margin-bottom: 20px; font-style: italic;">${line}</div>`;
           } else if (line.trim() !== "") {

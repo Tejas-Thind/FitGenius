@@ -14,7 +14,7 @@ import Navbar from "./components/Navbar";
 import { useAuth } from "./hooks/useAuth";
 
 const AuthHandler = ({ children }) => {
-  const { auth, setAuth } = useAuth();
+  const { setAuth } = useAuth();
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
