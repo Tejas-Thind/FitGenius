@@ -8,14 +8,26 @@ const authenticateToken = require("./middlewares/authToken");
 
 const app = express();
 
-// Define CORS options
+// Parse the REACT_APP_FRONTEND_URLS environment variable
+const allowedOrigins = process.env.REACT_APP_FRONTEND_URLS
+  ? process.env.REACT_APP_FRONTEND_URLS.split(",")
+  : [];
+
+// Configure CORS
 const corsOptions = {
-  origin: process.env.REACT_APP_FRONTEND_URL, // Update with your frontend URL
+  origin: (origin, callback) => {
+    // If no origin is specified, allow the request
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    // Otherwise, reject the request
+    callback(new Error("Not allowed by CORS"));
+  },
   methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-// Apply CORS settings
+// Apply CORS settings to all routes
 app.use(cors(corsOptions));
 
 // Handle preflight requests
@@ -40,7 +52,6 @@ mongoose
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(process.env.PORT, () => {
-      // PORT is backend URL
       console.log("Listening on port", process.env.PORT);
     });
   })
