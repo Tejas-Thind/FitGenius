@@ -9,14 +9,8 @@ const authenticateToken = require("./middlewares/authToken");
 const app = express();
 
 // Middleware
-const allowedOrigins = process.env.REACT_APP_FRONTEND_URLS.split(",");
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  })
-);
+app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
