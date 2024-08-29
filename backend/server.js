@@ -8,8 +8,18 @@ const authenticateToken = require("./middlewares/authToken");
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// Define CORS options
+const corsOptions = {
+  origin: process.env.REACT_APP_FRONTEND_URL, // Update with your frontend URL
+  methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+// Apply CORS settings
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
