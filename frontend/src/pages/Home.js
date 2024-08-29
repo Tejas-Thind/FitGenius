@@ -16,7 +16,7 @@ const Home = () => {
         .getSession()
         .then(({ data }) => data.session.access_token);
 
-      const response = await fetch("/api/workouts/", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/workouts/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

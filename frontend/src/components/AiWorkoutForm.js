@@ -10,6 +10,7 @@ const WorkoutForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    alert("Please allow a few seconds for the workout to appear.");
 
     // Extract the session to get the token
     const { data } = await supabase.auth.getSession();
@@ -19,14 +20,17 @@ const WorkoutForm = () => {
     const aiWorkout = { userInput: userPrompt };
 
     try {
-      const response = await fetch("/personalised-workouts/", {
-        method: "POST",
-        body: JSON.stringify(aiWorkout),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/personalised-workouts/`,
+        {
+          method: "POST",
+          body: JSON.stringify(aiWorkout),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = await response.json();
 

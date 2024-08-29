@@ -10,7 +10,6 @@ const requireAuth = (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
   try {
-    // Verify the token and attach the user ID to the request object
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     req.user = { id: decodedToken.sub };
     next();

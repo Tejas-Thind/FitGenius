@@ -44,7 +44,7 @@ export const AiWorkoutsContextProvider = ({ children }) => {
         const token = session.access_token;
         //console.log("Token:", token); // debugging
 
-        const response = await fetch("/personalised-workouts/", {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/personalised-workouts/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

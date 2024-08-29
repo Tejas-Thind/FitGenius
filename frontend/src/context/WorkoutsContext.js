@@ -42,7 +42,7 @@ export const WorkoutsContextProvider = ({ children }) => {
         const token = session.access_token;
         //console.log("Token:", token);
 
-        const response = await fetch("/api/workouts", {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/workouts`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

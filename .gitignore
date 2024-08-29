@@ -11,7 +11,7 @@ node_modules/
 # Ignore production build files
 /build/
 
-# Ignore environment files (keeping one for each folder)
+# Ignore environment files
 frontend/.env
 backend/.env
 
@@ -26,12 +26,20 @@ backend/.env
 .DS_Store
 
 # Ignore log files
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # Miscellaneous
 /frontend/.pnp
 /backend/.pnp
 /frontend/.pnp.js
 /backend/.pnp.js
+
+# Build Output
+frontend.dist/
+backend.dist/

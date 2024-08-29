@@ -12,7 +12,7 @@ const WorkoutDetails = ({ workout }) => {
       .getSession()
       .then(({ data }) => data.session.access_token);
 
-    const response = await fetch("/api/workouts/" + workout._id, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/workouts/` + workout._id, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

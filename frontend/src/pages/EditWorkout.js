@@ -22,7 +22,7 @@ const EditWorkout = () => {
       .then(({ data }) => data.session.access_token);
 
     const updatedWorkout = { title, load, sets, reps, notes };
-    const response = await fetch("/api/workouts/" + id, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/workouts/` + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
