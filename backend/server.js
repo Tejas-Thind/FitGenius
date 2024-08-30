@@ -24,6 +24,7 @@ const corsOptions = {
   },
   methods: ["GET", "POST", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 };
 
 // Apply CORS settings to all routes
