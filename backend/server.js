@@ -9,9 +9,11 @@ const authenticateToken = require("./middlewares/authToken");
 const app = express();
 
 // Parse allowed origins
-const allowedOrigins = process.env.REACT_APP_FRONTEND_URL
-  ? process.env.REACT_APP_FRONTEND_URL.split(",").map(url => url.trim())
-  : [];
+const allowedOrigins = [
+  "http://127.0.0.1:3000", // Localhost
+  "http://localhost:3000", // Localhost
+  "https://fit-genius-hhyt.vercel.app", // Vercel frontend domain
+];
 
 // Configure CORS
 const corsOptions = {
@@ -19,10 +21,10 @@ const corsOptions = {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("Not allowed by CORS"));
     }
   },
-  methods: ["GET", "POST", "PATCH", "DELETE"],
+  methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 };
@@ -31,7 +33,13 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Handle preflight requests
-app.options('*', cors(corsOptions));
+app.options("*", cors(corsOptions));
+
+// Set Referrer-Policy header for all responses
+app.use((req, res, next) => {
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  next();
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
