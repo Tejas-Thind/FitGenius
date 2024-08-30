@@ -17,7 +17,7 @@ const allowedOrigins = process.env.REACT_APP_FRONTEND_URL
 
 // Configure CORS
 const corsOptions = {
-  origin: allowedOrigins.length > 0 ? allowedOrigins : "*", // Fallback to '*' if no origins are set
+  origin: '*',
   methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
