@@ -8,14 +8,16 @@ const authenticateToken = require("./middlewares/authToken");
 
 const app = express();
 
-// Parse the REACT_APP_FRONTEND_URLS environment variable
+// Parse the REACT_APP_FRONTEND_URL environment variable
 const allowedOrigins = process.env.REACT_APP_FRONTEND_URL
   ? process.env.REACT_APP_FRONTEND_URL.split(",")
+      .map((origin) => origin.trim())
+      .filter(Boolean)
   : [];
 
 // Configure CORS
 const corsOptions = {
-  origin: allowedOrigins,
+  origin: allowedOrigins.length > 0 ? allowedOrigins : "*", // Fallback to '*' if no origins are set
   methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
