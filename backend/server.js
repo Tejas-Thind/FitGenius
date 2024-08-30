@@ -8,26 +8,30 @@ const authenticateToken = require("./middlewares/authToken");
 
 const app = express();
 
-// Middleware
-
-// Get allowed origins from environment variable
-const allowedOrigins = process.env.REACT_APP_FRONTEND_URL.split(',');
+// Parse the REACT_APP_FRONTEND_URLS environment variable
+const allowedOrigins = process.env.REACT_APP_FRONTEND_URL
+  ? process.env.REACT_APP_FRONTEND_URL.split(",")
+  : [];
 
 // Configure CORS
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+const corsOptions = {
+  origin: (origin, callback) => {
+    // If no origin is specified, allow the request
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
     }
+    // Otherwise, reject the request
+    callback(new Error("Not allowed by CORS"));
   },
   methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true // if you want to support cookies or authentication
-}));
+};
+
+// Apply CORS settings to all routes
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
