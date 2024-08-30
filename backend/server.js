@@ -15,14 +15,7 @@ const allowedOrigins = process.env.REACT_APP_FRONTEND_URL
 
 // Configure CORS
 const corsOptions = {
-  origin: (origin, callback) => {
-    // If no origin is specified, allow the request
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    // Otherwise, reject the request
-    callback(new Error("Not allowed by CORS"));
-  },
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
