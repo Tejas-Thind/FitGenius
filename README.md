@@ -1,6 +1,9 @@
 # FitGenius: Personalized AI-Powered Fitness App
 FitGenius is a full-stack fitness application designed to help users achieve their fitness goals by providing personalized workout plans generated using the OpenAI API. The app allows users to sign up, log in, and access customised workout routines tailored to their fitness levels and objectives. Each workout plan is generated dynamically based on user input and is presented in an easy-to-read, structured format.   
-  
+
+### Demo Video:  
+https://github.com/user-attachments/assets/6b4b1c2a-b499-443a-9aff-97a9829e308d   
+
 ### Key Features:
 **User Authentication:** Secure sign-up, log-in, and log-out functionality using Supabase's auth system.  
 **Personalized Workout Plans:** AI-generated workout routines tailored to user preferences, including specific muscle groups, equipment, and workout goals.  
