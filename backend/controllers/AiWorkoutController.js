@@ -70,7 +70,7 @@ const createAiWorkout = async (req, res) => {
         },
         { role: "user", content: userInput },
       ],
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
     });
 
     // Extract the AI-generated workout content
