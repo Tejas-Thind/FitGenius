@@ -74,6 +74,7 @@ const EditWorkout = () => {
   }
 
   return (
+    document.title = "FitGenius | Edit Workout",
     <div className="edit-workout">
       <h2 className="form-title">Edit Workout</h2>
       <form>

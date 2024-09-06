@@ -22,6 +22,7 @@ const Login = () => {
 
 
   return (
+    document.title = "FitGenius | Login",
     <form className="login" onSubmit={handleLogin}>
       <h2 className="form-title">Login</h2>
       <input

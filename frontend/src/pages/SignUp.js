@@ -19,6 +19,7 @@ const SignUp = () => {
   };
 
   return (
+    document.title = "FitGenius | Sign Up",
     <form className="signup" onSubmit={handleSignUp}>
       <h2 className="form-title">Sign Up</h2>
       <input
